@@ -1,55 +1,35 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-.chart rect {
-  fill: steelblue;
+<html>
+<head>
+<script type="text/javascript">
+function ajax_get_json(){
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    //var url = "my_parse_file.php";
+   // var fn = document.getElementById("first_name").value;
+   // var ln = document.getElementById("last_name").value;
+   // var vars = "firstname="+fn+"&lastname="+ln;
+    hr.open("GET", "myfile.json", true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/json", true);
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var data = JSON.parse(hr.responseText);
+            var results = document.getElementById("results");
+          results.innerHTML = data.user;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(null); // Actually execute the request
+    reults.innerHTML = "requesting...";
 }
-
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-</style>
-<svg class="chart"></svg>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-<script>
-
-var width = 420,
-    barHeight = 20;
-
-var x = d3.scale.linear()
-    .range([0, width]);
-
-var chart = d3.select(".chart")
-    .attr("width", width);
-
-d3.tsv("data.tsv", type, function(error, data) {
-  x.domain([0, d3.max(data, function(d) { return d.value; })]);
-
-  chart.attr("height", barHeight * data.length);
-
-  var bar = chart.selectAll("g")
-      .data(data)
-    .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-
-  bar.append("rect")
-      .attr("width", function(d) { return x(d.value); })
-      .attr("height", barHeight - 1);
-
-  bar.append("text")
-      .attr("x", function(d) { return x(d.value) - 3; })
-      .attr("y", barHeight / 2)
-      .attr("dy", ".35em")
-      .text(function(d) { return d.value; });
-});
-
-function type(d) {
-  d.value = +d.value; // coerce to number
-  return d;
-}
-
 </script>
+</head>
+<body>
+  <div id "results"></div>
+  <script type="text/javascript">ajax_get_json();</script>
+  
+</body>
+</html>
