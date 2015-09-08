@@ -3,32 +3,28 @@
 <head>
 <script type="text/javascript">
 function ajax_get_json(){
-    // Create our XMLHttpRequest object
+    
     var hr = new XMLHttpRequest();
-    // Create some variables we need to send to our PHP file
-    //var url = "my_parse_file.php";
-   // var fn = document.getElementById("first_name").value;
-   // var ln = document.getElementById("last_name").value;
-   // var vars = "firstname="+fn+"&lastname="+ln;
-    hr.open("GET", "myfile.json", true);
-    // Set content type header information for sending url encoded variables in the request
+    
+    hr.open("GET", "https://raw.githubusercontent.com/jsparsons2/jsparsons2.github.io/a6c241143f89f90dfac355863828a7116e7a5c2a/myfile.json", true);
+    
     hr.setRequestHeader("Content-type", "application/json", true);
-    // Access the onreadystatechange event for the XMLHttpRequest object
+    
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var data = JSON.parse(hr.responseText);
             var results = document.getElementById("results");
-          results.innerHTML = data.user;
+            results.innerHTML = data.user;
 	    }
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(null); // Actually execute the request
-    reults.innerHTML = "requesting...";
+    results.innerHTML = "requesting...";
 }
 </script>
 </head>
 <body>
-  <div id "results"></div>
+  <div id = "results"></div>
   <script type="text/javascript">ajax_get_json();</script>
   
 </body>
