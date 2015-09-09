@@ -55,7 +55,7 @@ d3.json(url, function(error, data) {
   
   
   var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
+    .domain([0, d3.max(data.features)])
     .range([0, 10]);
 
 d3.select(".chart")
@@ -66,9 +66,3 @@ d3.select(".chart")
     .text(function(d) { return d; });
 
   
-  
-  
-  
-});
-
-</script>
