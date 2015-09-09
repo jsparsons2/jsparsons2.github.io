@@ -9,7 +9,7 @@
 </div>
 <script>
 
-var data = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
+var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
 
 d3.json(data, function(error, data) {
   if (error) console.log(error);
@@ -48,7 +48,7 @@ d3.json(data, function(error, data) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-//var data = [4, 8, 15, 16, 23, 42];
+var data = [4, 8, 15, 16, 23, 42];
 
 var x = d3.scale.linear()
     .domain([0, d3.max(data)])
