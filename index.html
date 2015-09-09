@@ -1,4 +1,36 @@
-<!DOCTYPE html>
+<!doctype HTML>
+<meta charset="utf-8">
+<title>demo</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<body>
+<div>
+  <h1>Open the developer's console...</h1>
+</div>
+<script>
+
+var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
+
+d3.json(url, function(error, data) {
+  if (error) console.log(error);
+
+  // All your code goes here, that is, in between the two curly brackets {...}
+
+  // "data" is an Object with properties (you can inspect "data" in the developer's console)
+  console.log("This is the data object from USGS:", data);
+
+  // log the properties of "data" to the console
+  console.log("These are the properties of data object:", Object.keys(data));
+
+  // data.features is an array -- one element for each earthquake
+  console.log("We want values from data.features (an array):", data.features);
+
+  console.log("This is the first element of data.features array:", data.features[0]);
+});
+
+</script>
+  
+  <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
 
@@ -12,18 +44,9 @@
 }
 
 </style>
-<body>
 <div class="chart"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
 <script>
-
-var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
-
-d3.json(url, function(error, data) {
-  if (error) console.log(error);
-  console.log(data);
-});
 
 var data = [4, 8, 15, 16, 23, 42];
 
@@ -39,4 +62,3 @@ d3.select(".chart")
     .text(function(d) { return d; });
 
 </script>
-</body>
