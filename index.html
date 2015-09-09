@@ -1,66 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <meta charset="utf-8">
+<html>
+<head>
+		<title>Hw1</title>
+		</head>
+	<style>
 
-<title>HW1</title>
-
-<div>
-  <h1>Earthquake Magnitudes</h1>
-</div>
-
-<style>
-
-.chart div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
-}
-
+	.chart div {
+	  font: 10px sans-serif;
+	  background-color: steelblue;
+	  text-align: right;
+	  padding: 3px;
+	  margin: 1px;
+	  color: white;
+	}
 </style>
-<div class="chart"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-<script>
+	
+	<body>
+	<div class="chart"></div>
+	<!--Location of Script Libraries-->
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+			<script>
+						
+		var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
 
-var data = [4, 8, 15, 16, 23, 42];
+							
+							
+		//load the data
+			d3.json(url, function(error, data) {
+		  if (error) console.log(error);
+		  console.log(data);
+		  
+		var x = d3.scale.linear()
+			.domain([0, d3.max(d.properties.mag)])
+			.range([0, 420]);
 
-var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
-    .range([0, 420]);
-
-d3.select(".chart")
-  .selectAll("div")
-    .data(data)
-  .enter().append("div")
-    .style("width", function(d) { return x(d) + "px"; })
-    .text(function(d) { return d; });
-
-</script>
+		d3.select(".chart")
+		  .selectAll("div")
+			.data(data)
+		  .enter().append("div")
+			.style("width", function(d) { return x(d) + "px"; })
+			.text(function(d) { return d; });
+				
+						
+			});
 
 
-
-<body>
-
-<script>
-
-var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson";
-
-d3.json(url, function(error, data) {
-  if (error) console.log(error);
-
-  // All your code goes here, that is, in between the two curly brackets {...}
-
-  // "data" is an Object with properties (you can inspect "data" in the developer's console)
-  console.log("This is the data object from USGS:", data);
-
-  // log the properties of "data" to the console
-  console.log("These are the properties of data object:", Object.keys(data));
-
-  // data.features is an array -- one element for each earthquake
-  console.log("We want values from data.features (an array):", data.features);
-
-  console.log("This is the first element of data.features array:", data.features[0]);
-});
-
-</script>
+			
+			
+			</script>
+	</body>
+	
+</html>
